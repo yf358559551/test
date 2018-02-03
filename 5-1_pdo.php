@@ -7,7 +7,7 @@
  */
 
 try{
-    $dsn = "mysql:host = localhost;dbname = python";//配置PDO的数据源
+    $dsn = "mysql:dbname=python;host=127.0.0.1";//配置PDO的数据源
     $db = new PDO($dsn,'root','123456'); //构造方法
 
     $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
@@ -18,9 +18,9 @@ try{
     $db ->exec($sql);
 
     //使用预处理语句
-    $insert = $db->prepare("INSERT INTO test (name,remark,ip,time) VALUES ('?','?','?','".time()."')");
+    $insert = $db->prepare("INSERT INTO test (name,remark,ip,addTime) VALUES (?,?,?,'".time()."')");
     $insert->execute(array('admin','备注1111',"{$_SERVER['SSH_CLIENT']}"));
-    $insert->execute(array('admin','备注22222',"{$_SERVER['SSH_CLIENT']}",8,9));
+    $insert->execute(array('admin','备注22222',"{$_SERVER['SSH_CLIENT']}",8,9,8,8,8,8));
     //异常
 
     $sql = "select * from test";

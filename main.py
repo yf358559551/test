@@ -74,7 +74,24 @@ complaint = st.text_area('根据标准症状输入主诉症状，如有多个请
 write_text = text_all + '\n' + complaint
 
 if st.button('保存结果'):
-    file = file_name.split('\\')[1]
+    file = file_name.split('/')[1]
     save_name = os.path.join('output',file)
     with open(save_name, 'w', encoding='utf-8') as f:
         f.write(write_text)
+
+
+path2 = 'output'
+files2 = [os.path.join(path2,j) for j in os.listdir(path2)]
+
+file_name2 = st.sidebar.selectbox("查看标注后的文档", files2)
+
+with open(file_name2, 'r', encoding='UTF-8') as f:
+    text2 = f.read()
+
+text_biaozhu = st.text_area('标注后文档', value=text2 , key=None, height=50)
+
+if st.button('修改标注后结果'):
+    file = file_name2.split('/')[1]
+    save_name = os.path.join('output',file)
+    with open(save_name, 'w', encoding='utf-8') as f:
+        f.write(text_biaozhu)
